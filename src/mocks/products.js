@@ -1,45 +1,60 @@
-const CAR_PRODUCTS = [{
-  id: 0,
-  brand: 'bmw',
-  model: '3-series 318',
-  description: 'BMW 3 series',
-  image: '',
-}, {
-  id: 1,
-  brand: 'bmw',
-  model: '3-series 320i',
-  description: 'BMW 3 series',
-  image: '',
-}, {
-  id: 2,
-  brand: 'bmw',
-  model: '3-series 335',
-  description: 'BMW 3 series',
-  image: '',
-}, {
-  id: 3,
-  brand: 'bmw',
-  model: '1-series 118',
-  description: 'BMW 1 series',
-  image: '',
-}, {
-  id: 4,
-  brand: 'bmw',
-  model: '5-series 530',
-  description: 'BMW 5 series',
-  image: '',
-}, {
-  id: 5,
-  brand: 'bmw',
-  model: '7-series 740 Li',
-  description: 'BMW 7 series',
-  image: '',
-}, {
-  id: 6,
-  brand: 'bmw',
-  model: '4-series 435i',
-  description: 'BMW 4 series',
-  image: '',
-}];
+const CAR_PRODUCTS = [
+  {
+    "count": 4,
+    "description": "BMW 1-series",
+    "id": 1,
+    "price": 2.4,
+    "title": "ProductOne"
+  },
+  {
+    "count": 6,
+    "description": "BMW 3-series",
+    "id": 2,
+    "price": 10,
+    "title": "ProductNew"
+  },
+  {
+    "count": 7,
+    "description": "BMW 2-series",
+    "id": 3,
+    "price": 23,
+    "title": "ProductTop"
+  },
+  {
+    "count": 12,
+    "description": "BMW 7-series",
+    "id": 4,
+    "price": 15,
+    "title": "ProductTitle"
+  },
+  {
+    "count": 7,
+    "description": "BMW 2-series",
+    "id": 5,
+    "price": 23,
+    "title": "Product"
+  },
+  {
+    "count": 8,
+    "description": "BMW 4-series",
+    "id": 6,
+    "price": 15,
+    "title": "ProductTest"
+  },
+  {
+    "count": 2,
+    "description": "Short Product Descriptio1",
+    "id": 7,
+    "price": 23,
+    "title": "Product2"
+  },
+  {
+    "count": 3,
+    "description": "Short Product Description7",
+    "id": 8,
+    "price": 15,
+    "title": "ProductName"
+  }
+]
 
 export { CAR_PRODUCTS };

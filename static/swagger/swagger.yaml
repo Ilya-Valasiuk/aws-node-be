@@ -134,15 +134,15 @@ components:
         id:
           type: integer
           example: 10
-        brand:
-          type: string
-          example: bmw
-        model:
-          type: string
-          example: 3-series
+        count:
+          type: integer
+          example: 4
+        price:
+          type: integer
+          example: 123
         description:
           type: string
           example: BMW 3-series
-        image:
+        title:
           type: string
-          example: https://link-to-image
+          example: Product
