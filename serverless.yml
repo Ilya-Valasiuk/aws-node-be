@@ -1,0 +1,77 @@
+service:
+  name: productservice
+
+plugins:
+  - serverless-s3-deploy
+  - serverless-functions-base-path
+  - serverless-webpack
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: node-aws
+  region: ${opt:region, 'us-east-1'}
+  apiName: product-service-api
+
+custom:
+  functionsBasePath: src/handlers
+  webpack:
+    webpackConfig: "./webpack.config.js"
+    includeModules: true
+    keepOutputDirectory: true
+  assets:
+    auto: true
+    targets:
+      - bucket: !Ref SwaggerBucket
+        empty: false
+        files:
+          - source: ./static/swagger/ # this is a location of swagger documentation in the repository
+            globs: "**"
+
+functions:
+  getProductsList:
+    name: dev-${self:service.name}-getProductsList-function
+    handler: get-products-list/get-products-list.handler
+    events:
+      - http:
+          path: api/get-product-list
+          method: get
+
+  getProductsListById:
+    name: dev-${self:service.name}-getProductsListById-function
+    handler: get-products-list-by-id/get-products-list-by-id.handler
+    events:
+      - http:
+          path: api/get-product-list/{id}
+          method: get
+
+resources:
+  Resources:
+    SwaggerBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:service.name}-swagger
+        AccessControl: PublicRead
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders: 
+                - '*'
+              AllowedMethods: 
+                - 'GET'
+              AllowedOrigins: 
+                - 'https://petstore.swagger.io'
+
+    WebAppS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: SwaggerBucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Action: s3:GetObject
+              Resource: arn:aws:s3:::${self:service.name}-swagger/*
+              Principal: '*'
