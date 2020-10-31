@@ -4,56 +4,42 @@ const CAR_PRODUCTS = [
     "description": "BMW 1-series",
     "id": 1,
     "price": 2.4,
-    "title": "ProductOne"
+    "title": "BMW 1-series"
   },
   {
     "count": 6,
     "description": "BMW 3-series",
     "id": 2,
     "price": 10,
-    "title": "ProductNew"
+    "title": "BMW 3-series"
   },
   {
     "count": 7,
     "description": "BMW 2-series",
     "id": 3,
     "price": 23,
-    "title": "ProductTop"
+    "title": "BMW 2-series"
   },
   {
     "count": 12,
     "description": "BMW 7-series",
     "id": 4,
     "price": 15,
-    "title": "ProductTitle"
+    "title": "BMW 7-series"
   },
   {
     "count": 7,
     "description": "BMW 2-series",
     "id": 5,
     "price": 23,
-    "title": "Product"
+    "title": "BMW 2-series"
   },
   {
     "count": 8,
     "description": "BMW 4-series",
     "id": 6,
     "price": 15,
-    "title": "ProductTest"
-  },
-  {
-    "count": 2,
-    "description": "Short Product Descriptio1",
-    "id": 7,
-    "price": 23,
-    "title": "Product2"
-  },
-  {
-    "count": 3,
-    "description": "Short Product Description7",
-    "id": 8,
-    "price": 15,
-    "title": "ProductName"
+    "title": "BMW 4-series"
   }
 ]
 

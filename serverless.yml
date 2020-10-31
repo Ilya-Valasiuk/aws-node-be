@@ -61,7 +61,7 @@ resources:
               AllowedMethods: 
                 - 'GET'
               AllowedOrigins: 
-                - 'https://petstore.swagger.io'
+                - '*'
 
     WebAppS3BucketPolicy:
       Type: AWS::S3::BucketPolicy
