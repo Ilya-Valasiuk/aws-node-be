@@ -3,7 +3,7 @@ getProductsList:
   handler: get-products-list/get-products-list.handler
   events:
     - http:
-        path: api/get-product-list
+        path: product
         method: GET
 
 getProductsListById:
@@ -11,7 +11,7 @@ getProductsListById:
   handler: get-products-list-by-id/get-products-list-by-id.handler
   events:
     - http:
-        path: api/get-product-list/{id}
+        path: product/{id}
         method: GET
 
 createProduct:
@@ -19,5 +19,6 @@ createProduct:
   handler: create-product/create-product.handler
   events:
     - http:
-        path: api/product
+        path: product
         method: POST
+        cors: true
