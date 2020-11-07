@@ -1,0 +1,27 @@
+Resources:
+  SwaggerBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:service.name}-swagger
+      AccessControl: PublicRead
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: 
+              - '*'
+            AllowedMethods: 
+              - 'GET'
+            AllowedOrigins: 
+              - '*'
+
+  WebAppS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: SwaggerBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Action: s3:GetObject
+            Resource: arn:aws:s3:::${self:service.name}-swagger/*
+            Principal: '*'

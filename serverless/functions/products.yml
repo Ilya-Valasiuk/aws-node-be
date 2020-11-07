@@ -1,0 +1,23 @@
+getProductsList:
+  name: dev-${self:service.name}-getProductsList-function
+  handler: get-products-list/get-products-list.handler
+  events:
+    - http:
+        path: api/get-product-list
+        method: GET
+
+getProductsListById:
+  name: dev-${self:service.name}-getProductsListById-function
+  handler: get-products-list-by-id/get-products-list-by-id.handler
+  events:
+    - http:
+        path: api/get-product-list/{id}
+        method: GET
+
+createProduct:
+  name: dev-${self:service.name}-createProduct-function
+  handler: create-product/create-product.handler
+  events:
+    - http:
+        path: api/product
+        method: POST
