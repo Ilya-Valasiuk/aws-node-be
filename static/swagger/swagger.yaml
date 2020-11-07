@@ -1,0 +1,148 @@
+openapi: '3.0.0'
+info:
+  title: Product Service
+  description: |
+    AWS API Gateway endpoints to work with products (cars)
+  version: 0.0.1
+servers:
+  - url: https://rm4cc318y5.execute-api.us-east-1.amazonaws.com/dev
+    description: dev
+tags:
+  - name: Cars
+paths:
+  /api/get-product-list:
+    get:
+      tags:
+        - Cars
+      summary: Get all products(cars) in store
+      description: Get all products(cars) in store
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+  /api/get-product-list/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Product id
+        schema:
+          type: integer
+          example: 1
+    get:
+      tags:
+        - Cars
+      summary: Get product by id
+      description: Get product by id
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: '#/components/schemas/Product'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    BadRequest:
+      description: You did not provided required parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestError'
+    NotFound:
+      description: Item not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFound'
+    InternalServerError:
+      description: Common server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerError'
+  schemas:
+    BadRequestError:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 400
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+              example: 'BAD_REQUEST'
+            message:
+              type: string
+              example: 'Missing required parameters'
+    NotFound:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 404
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+              example: 'Not found'
+            message:
+              type: string
+              example: 'Item with id = 10 not found.'
+    InternalServerError:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 500
+        error:
+          type: object
+          properties:
+            name:
+              type: string
+              example: 'INTERNAL_SERVER'
+            message:
+              type: string
+              example: 'Internal server error'
+    Products:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        count:
+          type: integer
+          example: 4
+        price:
+          type: integer
+          example: 123
+        description:
+          type: string
+          example: BMW 3-series
+        title:
+          type: string
+          example: Product
