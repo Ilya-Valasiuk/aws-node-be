@@ -1,0 +1,32 @@
+Resources:
+  UploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:service.name}-upload
+      AccessControl: PublicRead
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: 
+              - '*'
+            AllowedMethods: 
+              - 'GET'
+              - 'PUT'
+            AllowedOrigins: 
+              - '*'
+
+  WebAppS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: UploadBucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowPublicRead
+            Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+            Resource: arn:aws:s3:::${self:service.name}-upload/*
+            Principal:
+              AWS:
+                - "*"

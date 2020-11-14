@@ -1,0 +1,22 @@
+importProductsFile:
+  name: dev-${self:service.name}-import-function
+  handler: import/import.handler
+  events:
+    - http:
+        path: import
+        method: GET
+        request:
+          parameters:
+            querystrings:
+              name: true
+
+importFileParser:
+  name: dev-${self:service.name}-fileparser-function
+  handler: file-parser/index.handler
+  events:
+    - s3:
+        bucket: ${self:service.name}-upload
+        event: s3:ObjectCreated:*
+        rules:
+          - prefix: uploaded/
+        existing: true

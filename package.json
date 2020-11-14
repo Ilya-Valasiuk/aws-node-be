@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.792.0",
+    "csv-parser": "^2.3.3",
     "pg": "^8.4.2",
     "serverless": "^2.9.0",
     "uuid": "^8.3.1"
@@ -21,7 +23,8 @@
   },
   "scripts": {
     "test": "jest",
-    "deploy": "sls deploy"
+    "deploy:product-service": "sls deploy -c serverless-product-service.yml",
+    "deploy:import-service": "sls deploy -c serverless-import-service.yml"
   },
   "repository": {
     "type": "git",

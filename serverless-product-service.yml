@@ -22,7 +22,7 @@ provider:
     PGPORT: 5432
 
 custom:
-  functionsBasePath: src/handlers
+  functionsBasePath: src/product-service/handlers
   webpack:
     webpackConfig: "./webpack.config.js"
     includeModules: true
@@ -40,4 +40,4 @@ functions:
   - ${file(./serverless/functions/products.yml)}
 
 resources:
-  - ${file(./serverless/resources/s3.yml)}
+  - ${file(./serverless/resources/swagger-bucket.yml)}
