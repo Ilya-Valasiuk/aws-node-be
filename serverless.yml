@@ -14,6 +14,12 @@ provider:
   profile: node-aws
   region: ${opt:region, 'us-east-1'}
   apiName: product-service-api
+  environment:
+    PGUSER: ${ssm:rs-node-aws-pgusername}
+    PGPASSWORD: ${ssm:rs-node-aws-pgpassword}
+    PGHOST: ${ssm:rs-node-aws-pghost}
+    PGDATABASE: ${ssm:rs-node-aws-pgdatabase}
+    PGPORT: 5432
 
 custom:
   functionsBasePath: src/handlers
@@ -31,47 +37,7 @@ custom:
             globs: "**"
 
 functions:
-  getProductsList:
-    name: dev-${self:service.name}-getProductsList-function
-    handler: get-products-list/get-products-list.handler
-    events:
-      - http:
-          path: api/get-product-list
-          method: get
-
-  getProductsListById:
-    name: dev-${self:service.name}-getProductsListById-function
-    handler: get-products-list-by-id/get-products-list-by-id.handler
-    events:
-      - http:
-          path: api/get-product-list/{id}
-          method: get
+  - ${file(./serverless/functions/products.yml)}
 
 resources:
-  Resources:
-    SwaggerBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${self:service.name}-swagger
-        AccessControl: PublicRead
-        CorsConfiguration:
-          CorsRules:
-            - AllowedHeaders: 
-                - '*'
-              AllowedMethods: 
-                - 'GET'
-              AllowedOrigins: 
-                - '*'
-
-    WebAppS3BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: SwaggerBucket
-        PolicyDocument:
-          Statement:
-            - Sid: PublicReadGetObject
-              Effect: Allow
-              Action: s3:GetObject
-              Resource: arn:aws:s3:::${self:service.name}-swagger/*
-              Principal: '*'
+  - ${file(./serverless/resources/s3.yml)}

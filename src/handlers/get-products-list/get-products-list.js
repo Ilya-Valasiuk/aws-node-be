@@ -1,5 +1,21 @@
-import { createSuccessResponse } from '../../utils/api-response';
+import { createSuccessResponse, createErrorResponse } from '../../utils/api-response';
+import { InternalServerRequestError } from '../../helpers/errors';
+import { pool } from './../../service/postgres';
 
-import { CAR_PRODUCTS } from "../../mocks/products";
+let client;
 
-export const handler = async () => createSuccessResponse({ products: CAR_PRODUCTS });
+const PRODUCTS_SQL = 'SELECT id, title, description, price, count FROM products INNER JOIN stocks ON id = product_id';
+
+export const handler = async () => {
+  client = await pool.connect();
+
+  try {
+    const query = await client.query(PRODUCTS_SQL);
+
+    return createSuccessResponse({ products: query.rows })
+  } catch (error) {
+    return createErrorResponse(new InternalServerRequestError('Something failes.'))
+  } finally {
+    client.release();
+  }
+}

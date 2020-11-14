@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "serverless": "^2.9.0"
+    "pg": "^8.4.2",
+    "serverless": "^2.9.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
