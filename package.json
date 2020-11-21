@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.792.0",
+    "csv-parser": "^2.3.3",
     "pg": "^8.4.2",
     "serverless": "^2.9.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
+    "aws-sdk-mock": "^5.1.0",
     "babel-jest": "^26.6.1",
     "jest": "^26.6.1",
     "serverless-functions-base-path": "^1.0.32",
@@ -21,7 +24,8 @@
   },
   "scripts": {
     "test": "jest",
-    "deploy": "sls deploy"
+    "deploy:product-service": "sls deploy -c serverless-product-service.yml",
+    "deploy:import-service": "sls deploy -c serverless-import-service.yml"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createSuccessResponse, createErrorResponse } from '../../utils/api-response';
-import { BadRequestError, InternalServerRequestError } from '../../helpers/errors';
+import { createSuccessResponse, createErrorResponse } from '../../../utils/api-response';
+import { BadRequestError, InternalServerRequestError } from '../../../helpers/errors';
 import { pool } from './../../service/postgres';
 
 let client;
