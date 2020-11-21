@@ -1,15 +1,15 @@
 import { SNS } from 'aws-sdk';
 import axios from 'axios';
 
-const sns = new SNS();
-
 export const handler = async (event) => {
+  const sns = new SNS();
+
   try {
     for (const record of event.Records) {
       console.log(record);
       const body = JSON.parse(record.body);
 
-      const response = await axios('https://rm4cc318y5.execute-api.us-east-1.amazonaws.com/dev/product', { method: 'POST', data: JSON.stringify(body) })
+      const response = await axios.post('https://rm4cc318y5.execute-api.us-east-1.amazonaws.com/dev/product', body)
 
       console.log('Product created.');
 
