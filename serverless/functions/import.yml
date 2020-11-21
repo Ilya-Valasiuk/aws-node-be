@@ -20,3 +20,14 @@ importFileParser:
         rules:
           - prefix: uploaded/
         existing: true
+  
+catalogBatchProcess:
+  name: dev-${self:service.name}-batchprocess-function
+  handler: batch-process/index.handler
+  events:
+    - sqs:
+        batchSize: 5
+        arn:
+          Fn::GetAtt:
+            - catalogItemsQueue
+            - Arn

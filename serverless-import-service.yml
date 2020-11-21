@@ -15,6 +15,8 @@ provider:
   apiName: import-service-api
   environment:
     UPLOAD_BUCKET_NAME: ${self:service.name}-upload
+    SQS_URL: !Ref catalogItemsQueue
+    SNS_ARN: !Ref createProductTopic
 
   iamRoleStatements:
     - Effect: Allow
@@ -26,6 +28,14 @@ provider:
         - "s3:*"
       Resource:
         - "arn:aws:s3:::${self:service.name}-upload/*"
+    - Effect: Allow
+      Action: "sqs:*"
+      Resource:
+        - Fn::GetAtt: [catalogItemsQueue, Arn]
+    - Effect: Allow
+      Action: "sns:*"
+      Resource:
+        - !Ref createProductTopic
 
 custom:
   functionsBasePath: src/import-service/handlers
@@ -39,3 +49,5 @@ functions:
 
 resources:
   - ${file(./serverless/resources/upload-bucket.yml)}
+  - ${file(./serverless/resources/sqs.yml)}
+  - ${file(./serverless/resources/sns.yml)}

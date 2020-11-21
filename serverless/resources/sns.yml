@@ -1,0 +1,27 @@
+Resources:
+  createProductTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: notify-about-products
+
+  createProductTopicSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: ilya.valasiuk@gmail.com
+      Protocol: email
+      FilterPolicy:
+        title:
+          - "BMW 4-series"
+      TopicArn:
+        Ref: createProductTopic
+
+  createProductTopicSubscriptionForAnotherTitle:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: lyntik22@gmail.com
+      Protocol: email
+      FilterPolicy:
+        title:
+          - "BMW 2-series"
+      TopicArn:
+        Ref: createProductTopic
