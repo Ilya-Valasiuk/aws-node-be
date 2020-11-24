@@ -27,7 +27,4 @@ catalogBatchProcess:
   events:
     - sqs:
         batchSize: 5
-        arn:
-          Fn::GetAtt:
-            - catalogItemsQueue
-            - Arn
+        arn: ${cf:productservice-dev.SqsArn}

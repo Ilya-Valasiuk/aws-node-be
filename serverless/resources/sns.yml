@@ -7,7 +7,7 @@ Resources:
   createProductTopicSubscription:
     Type: AWS::SNS::Subscription
     Properties:
-      Endpoint: testemail88888888888888888888@gmail.com
+      Endpoint: ilya.valasiuk@gmail.com
       Protocol: email
       FilterPolicy:
         title:
