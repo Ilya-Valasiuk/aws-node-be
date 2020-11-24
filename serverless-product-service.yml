@@ -15,11 +15,18 @@ provider:
   region: ${opt:region, 'us-east-1'}
   apiName: product-service-api
   environment:
+    SNS_ARN: !Ref createProductTopic
     PGUSER: ${ssm:rs-node-aws-pgusername}
     PGPASSWORD: ${ssm:rs-node-aws-pgpassword}
     PGHOST: ${ssm:rs-node-aws-pghost}
     PGDATABASE: ${ssm:rs-node-aws-pgdatabase}
     PGPORT: 5432
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action: "sns:*"
+      Resource:
+        - !Ref createProductTopic
 
 custom:
   functionsBasePath: src/product-service/handlers
@@ -45,4 +52,3 @@ resources:
   - ${file(./serverless/resources/sns.yml)}
 
   - ${file(./serverless/resources/outputs.yml)}
-

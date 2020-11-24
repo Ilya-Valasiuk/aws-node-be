@@ -16,7 +16,6 @@ provider:
   environment:
     UPLOAD_BUCKET_NAME: ${self:service.name}-upload
     SQS_URL: ${cf:productservice-dev.SqsUrl}
-    SNS_ARN: ${cf:productservice-dev.SnsArn}
 
   iamRoleStatements:
     - Effect: Allow
@@ -32,10 +31,6 @@ provider:
       Action: "sqs:*"
       Resource:
         - ${cf:productservice-dev.SqsArn}
-    - Effect: Allow
-      Action: "sns:*"
-      Resource:
-        - ${cf:productservice-dev.SnsArn}
 
 custom:
   functionsBasePath: src/import-service/handlers
