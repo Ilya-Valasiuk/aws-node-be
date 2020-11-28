@@ -44,3 +44,4 @@ functions:
 
 resources:
   - ${file(./serverless/resources/upload-bucket.yml)}
+  - ${file(./serverless/resources/api-gateway-response.yml)}
