@@ -15,6 +15,7 @@ provider:
   apiName: import-service-api
   environment:
     UPLOAD_BUCKET_NAME: ${self:service.name}-upload
+    SQS_URL: ${cf:productservice-dev.SqsUrl}
 
   iamRoleStatements:
     - Effect: Allow
@@ -26,6 +27,10 @@ provider:
         - "s3:*"
       Resource:
         - "arn:aws:s3:::${self:service.name}-upload/*"
+    - Effect: Allow
+      Action: "sqs:*"
+      Resource:
+        - ${cf:productservice-dev.SqsArn}
 
 custom:
   functionsBasePath: src/import-service/handlers

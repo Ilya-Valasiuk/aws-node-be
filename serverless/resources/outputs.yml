@@ -1,0 +1,6 @@
+Outputs:
+  SqsUrl:
+    Value: !Ref catalogItemsQueue
+  SqsArn:
+    Value:
+      Fn::GetAtt: [catalogItemsQueue, Arn]

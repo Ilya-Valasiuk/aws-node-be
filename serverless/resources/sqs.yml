@@ -1,0 +1,5 @@
+Resources:
+  catalogItemsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: cvs-sqs
