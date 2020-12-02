@@ -1,0 +1,32 @@
+service:
+  name: authorizationservice
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-functions-base-path
+  - serverless-webpack
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: node-aws
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    ilyavalasiuk: ${env:ilyavalasiuk}
+
+custom:
+  functionsBasePath: src/authorization-service/handlers
+  webpack:
+    webpackConfig: "./webpack.config.js"
+    includeModules: true
+    keepOutputDirectory: true
+
+functions:
+  - ${file(./serverless/functions/authorization.yml)}
+
+resources:
+  Outputs:
+    authorizationArn:
+      Value: !GetAtt AuthorizationLambdaFunction.Arn

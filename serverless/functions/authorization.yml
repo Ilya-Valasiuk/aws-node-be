@@ -1,0 +1,3 @@
+authorization:
+  name: dev-${self:service.name}-authorization-function
+  handler: authorization/index.handler

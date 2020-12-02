@@ -5,6 +5,12 @@ importProductsFile:
     - http:
         path: import
         method: GET
+        cors: true
+        authorizer:
+          arn: ${cf:authorizationservice-dev.authorizationArn}
+          managedExternally: false
+          resultTtlInSeconds: 0
+          identitySource: method.request.header.Authorization
         request:
           parameters:
             querystrings:
