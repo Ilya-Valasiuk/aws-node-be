@@ -1,11 +1,12 @@
 {
-  "name": "product-service",
+  "name": "iv-node-in-aws",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.0",
     "csv-parser": "^2.3.3",
+    "express": "^4.17.1",
     "pg": "^8.4.2",
     "uuid": "^8.3.1"
   },
@@ -26,6 +27,10 @@
   },
   "scripts": {
     "test": "jest",
+    "start:bff": "node src/bff-service/app.js",
+    "eb-init": "eb init --platform node.js --profile node-aws",
+    "eb-create": "eb create development --single --cname iv-bff-develop",
+    "eb-terminate": "eb terminate development",
     "deploy:product-service": "sls deploy -c serverless-product-service.yml",
     "deploy:import-service": "sls deploy -c serverless-import-service.yml",
     "deploy:authorization-service": "sls deploy -c serverless-authorization-service.yml"
