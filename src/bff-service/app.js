@@ -21,7 +21,7 @@ app.all('/*', (req, res) => {
     const axiosConfig = {
       method: req.method,
       url: `${recipientUrl}${req.originalUrl}`,
-      ...recipientUrl(Object.keys(req.body || {}).length > 0 && { data: req.body })
+      ...(Object.keys(req.body || {}).length > 0 && { data: req.body })
     };
 
     console.log(axiosConfig);
