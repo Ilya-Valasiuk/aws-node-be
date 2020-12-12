@@ -29,7 +29,7 @@
   "scripts": {
     "test": "jest",
     "start:bff": "node src/bff-service/app.js",
-    "start:bff-nest": "cd src/bff-nestjs && npm run build && npm run start:prod",
+    "start:bff-nest": "cd src/bff-nestjs && npm install && npm run build && npm run start:prod",
     "eb-init": "eb init --platform node.js --profile node-aws",
     "eb-create": "eb create development --single --cname iv-bff-develop",
     "eb-terminate": "eb terminate development",
