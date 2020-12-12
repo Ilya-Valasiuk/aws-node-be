@@ -31,7 +31,6 @@ app.all('/*', (req, res) => {
 
     console.log(axiosConfig);
     console.log('Cache: ', cache);
-    console.log(cache[axiosConfig.url] && Date.now() < cache[axiosConfig.url].created + cache[axiosConfig.url].ttl);
 
     if (cache[axiosConfig.url] && axiosConfig.method === 'GET' && Date.now() < cache[axiosConfig.url].created + cache[axiosConfig.url].ttl) {
       console.log('Response from cache');
