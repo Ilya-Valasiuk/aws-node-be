@@ -1,10 +1,13 @@
 const express = require('express');
-const https = require('https');
 const axios = require('axios').default;
 require('dotenv').config({ path: __dirname + '/.env' });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const cache = {};
+
+const TWO_MINUTES = 120000;
 
 app.use(express.json());
 
@@ -27,12 +30,25 @@ app.all('/*', (req, res) => {
     };
 
     console.log(axiosConfig);
+    console.log('Cache: ', cache);
+    console.log(cache[axiosConfig.url] && Date.now() < cache[axiosConfig.url].created + cache[axiosConfig.url].ttl);
+
+    if (cache[axiosConfig.url] && axiosConfig.method === 'GET' && Date.now() < cache[axiosConfig.url].created + cache[axiosConfig.url].ttl) {
+      console.log('Response from cache');
+      res.status(304).json(cache[axiosConfig.url].data);
+      return;
+    }
 
     axios(axiosConfig).then(response => {
       console.log('response from recipient: ', response.data);
+      cache[axiosConfig.url] = { data: response.data, created: Date.now(), ttl: TWO_MINUTES }
       res.json(response.data)
     }).catch((error) => {
       console.log('error from recipient: ', JSON.stringify(error));
+
+      if (cache[axiosConfig.url]) {
+        cache[axiosConfig.url] = null;
+      }
 
       if (error.response) {
         const { status, data } = error.response;
