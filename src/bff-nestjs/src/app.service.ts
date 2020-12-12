@@ -9,7 +9,6 @@ const TWO_MINUTES = 120000;
 @Injectable()
 export class AppService {
   async handleRequest(req: Request): Promise<{statusCode: number, response: {}}> {
-    // console.log(req)
     console.log('original url ', req.originalUrl);
     console.log('method ', req.method);
     console.log('body ', req.body);
